@@ -1,28 +1,39 @@
-let isNumber = function(n){
-    return !isNaN(parseFloat(n));
-};
-
-let randomNum = Math.ceil(Math.random() * 100);
-
-console.log(randomNum);
-
-function watch(random) {
-    let numUser = prompt('Угадай число от 1 до 100');
-
-    if (numUser == random) {
-        alert(`Поздравляю, Вы угадали!!!`);
-    } else if (!numUser) {
-        alert('Игра окончена');
-    } else if (isNumber(random) == false) {
-        alert('Введи число!');
-        watch(random);
-    } else if (numUser < random) {
-        alert('Загаданное число больше');
-        watch(random);
-    } else if (numUser > random) {
-        alert('Загаданное число меньше');
-        watch(random);
-    } 
+function isNumber(num) {
+    return !isNaN(parseFloat(num));
 }
 
-watch(randomNum);
+const game = function() {
+
+    const randomNum = Math.ceil(Math.random() * 100);
+
+    console.log(randomNum);
+
+    function repeat() {
+
+        let numUser = prompt('Угадай число от 1 до 100');
+
+        if (isNumber(numUser)) {
+            if (numUser < randomNum) {
+                alert('Загаданное число больше');
+                repeat();
+            } else if (numUser > randomNum) {
+                alert('Загаданное число меньше');
+                repeat();
+            } else {
+                alert(`Поздравляю, Вы угадали!!!`);
+            }
+        } else {
+            if (numUser === null) {
+                alert('Игра окончена');
+            } else {
+                alert('Введи число!');
+                repeat();
+            }
+        }
+    }
+
+    return repeat();
+
+}
+
+game();
